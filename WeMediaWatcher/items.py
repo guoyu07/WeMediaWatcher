@@ -80,3 +80,16 @@ class QiongyouNoteItem(scrapy.Item):
     create_time = Field()
     # 数据抓取时间
     crawl_time = Field()
+
+
+class BaiduUserItem(scrapy.Item):
+    user_id = Field()
+    user_name = Field()
+    user_info = Field()
+    user_level = Field()
+    user_location = Field()
+    crawl_time = Field()
+
+
+class BaiduNoteItem(scrapy.Item):
+    pass

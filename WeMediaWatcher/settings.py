@@ -18,7 +18,7 @@ NEWSPIDER_MODULE = 'WeMediaWatcher.spiders'
 # USER_AGENT = 'WeMediaWatcher (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 # CONCURRENT_REQUESTS = 32
@@ -89,9 +89,9 @@ ROBOTSTXT_OBEY = True
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 FEED_EXPORT_ENCODING = 'utf-8'
-
-ITEM_PIPELINES = {'WeMediaWatcher.pipelines.MongoDBPipeline': 300}
-MONGODB_SERVER = "182.254.244.138"
-MONGODB_PORT = 27017
-MONGODB_DB = "wemedia"
-MONGODB_COLLECTION = "QiongyouNote"
+#
+# ITEM_PIPELINES = {'WeMediaWatcher.pipelines.MongoDBPipeline': 300}
+# MONGODB_SERVER = "182.254.244.138"
+# MONGODB_PORT = 27017
+# MONGODB_DB = "wemedia"
+# MONGODB_COLLECTION = "QiongyouNote"
