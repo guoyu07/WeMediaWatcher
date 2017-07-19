@@ -31,6 +31,7 @@ class Mafengwo_Spider(Spider):
         item['follow'] = sel.xpath('//div[contains(@class,"MAvaNums")]/strong/a/text()').extract()[0]
         item['fans'] = sel.xpath('//div[contains(@class,"MAvaNums")]/strong/a/text()').extract()[1]
         item['honey'] = sel.xpath('//div[contains(@class,"MAvaNums")]/strong/a/text()').extract()[2]
+        item["crawl_time"] = time.time()
         return item
 
 
@@ -78,11 +79,12 @@ class MafengwoNote_Spider(Spider):
             collect = note_more[1]
             note_time = note_info.xpath("div//span[contains(@class,'time')]//text()").extract()[0]
             # 装配
-            note_item["note_id"] = note_href.replace("/i/","").replace(".html","")
+            note_item["note_id"] = note_href.replace("http://www.mafengwo.cn", "").replace("/i/", "").replace(".html",
+                                                                                                              "")
             note_item["user_name"] = user_info["user_name"]
             note_item["user_id"] = user_info["iUid"]
             note_item["note_title"] = note_title
-            note_item["note_href"] = note_href
+            note_item["note_href"] = "http://www.mafengwo.cn/i/" + note_item["note_id"]
             note_item["pv"] = pv
             note_item["comment"] = comment
             note_item["collect"] = collect

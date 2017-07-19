@@ -23,6 +23,7 @@ class MafengwoUserItem(scrapy.Item):
     follow = Field()
     fans = Field()
     honey = Field()
+    crawl_time = Field()
 
 
 class MafengwoNoteItem(scrapy.Item):
@@ -37,6 +38,37 @@ class MafengwoNoteItem(scrapy.Item):
     # 蜂首游记
     is_fs = Field()
     # 阅读数
+    pv = Field()
+    # 评论
+    comment = Field()
+    # 收藏
+    collect = Field()
+    # 顶
+    favour = Field()
+    # 创建时间
+    create_time = Field()
+    # 数据抓取时间
+    crawl_time = Field()
+
+
+class QiongyouUserItem(scrapy.Item):
+    user_name = Field()
+    user_id = Field()
+    user_level = Field()
+    user_location = Field()
+    follow = Field()
+    fans = Field()
+    crawl_time = Field()
+
+
+class QiongyouNoteItem(scrapy.Item):
+    note_id = Field()
+    user_name = Field()
+    user_id = Field()
+    note_title = Field()
+    # 精华等级
+    note_type = Field()
+    note_href = Field()
     pv = Field()
     # 评论
     comment = Field()

@@ -94,4 +94,4 @@ ITEM_PIPELINES = {'WeMediaWatcher.pipelines.MongoDBPipeline': 300}
 MONGODB_SERVER = "182.254.244.138"
 MONGODB_PORT = 27017
 MONGODB_DB = "wemedia"
-MONGODB_COLLECTION = "MafengwoUser"
+MONGODB_COLLECTION = "QiongyouNote"
