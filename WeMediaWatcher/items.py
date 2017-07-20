@@ -83,6 +83,7 @@ class QiongyouNoteItem(scrapy.Item):
 
 
 class BaiduUserItem(scrapy.Item):
+    # 无粉丝 无关注
     user_id = Field()
     user_name = Field()
     user_info = Field()
@@ -92,4 +93,15 @@ class BaiduUserItem(scrapy.Item):
 
 
 class BaiduNoteItem(scrapy.Item):
-    pass
+    # 无创建时间 无收藏
+    note_id = Field()
+    user_name = Field()
+    user_id = Field()
+    note_title = Field()
+    # 游记类型
+    note_type = Field()
+    note_href = Field()
+    pv = Field()
+    comment = Field()
+    favour = Field()
+    crawl_time = Field()

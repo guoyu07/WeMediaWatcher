@@ -27,3 +27,27 @@ class BaidulvyouUser_Spider(Spider):
             0].strip().replace("常住地 ", "")
         item["crawl_time"] = time.time()
         return item
+
+
+class BaidulvNote_Spider(Spider):
+    name = "baidulvyou_note"
+    allowed_domains = ["lvyou.baidu.com"]
+
+    @staticmethod
+    def load_user_list():
+        user_name_iuid = {"周杨fly": "060519fe24de71cf701ca2a4"}
+        return user_name_iuid
+
+    def start_requests(self):
+        url = "http://www.mafengwo.cn/wo/ajax_post.php"
+        requests = []
+        user_name_iuid = self.load_user_list()
+        for user_name, user_iuid in user_name_iuid.items():
+            for i in range(1, 4):
+                form_data = {
+                    "pn": "10",
+                    "rn": "10",
+                    "pagelets[]": "pagelet_main",
+                    "t": "769925"
+                }
+                pass
