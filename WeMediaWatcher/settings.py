@@ -90,8 +90,8 @@ ROBOTSTXT_OBEY = False
 
 FEED_EXPORT_ENCODING = 'utf-8'
 #
-# ITEM_PIPELINES = {'WeMediaWatcher.pipelines.MongoDBPipeline': 300}
-# MONGODB_SERVER = "182.254.244.138"
-# MONGODB_PORT = 27017
-# MONGODB_DB = "wemedia"
-# MONGODB_COLLECTION = "QiongyouNote"
+ITEM_PIPELINES = {'WeMediaWatcher.pipelines.MongoDBPipeline': 300}
+MONGODB_SERVER = "182.254.244.138"
+MONGODB_PORT = 27017
+MONGODB_DB = "wemedia"
+MONGODB_COLLECTION = "WeiQ"

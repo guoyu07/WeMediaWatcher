@@ -105,3 +105,16 @@ class BaiduNoteItem(scrapy.Item):
     comment = Field()
     favour = Field()
     crawl_time = Field()
+
+
+class WeiboUser(scrapy.Item):
+    user_name = Field()
+
+
+class WeiqUser(scrapy.Item):
+    user_name = Field()
+    account_type = Field()
+    impact_level = Field()
+    price_tweet = Field()
+    price_retweet = Field()
+    fans = Field()
