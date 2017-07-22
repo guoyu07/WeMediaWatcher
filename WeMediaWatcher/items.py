@@ -109,6 +109,21 @@ class BaiduNoteItem(scrapy.Item):
 
 class WeiboUser(scrapy.Item):
     user_name = Field()
+    user_true_name = Field()
+    user_location = Field()
+    gender = Field()
+    birthday = Field()
+    blood_type = Field()
+    user_blog = Field()
+    custom_url_1 = Field()
+    custom_url_2 = Field()
+    user_desc = Field()
+    enroll_time = Field()
+    email = Field()
+    qq = Field()
+    company = Field()
+    company_location = Field()
+    position = Field()
 
 
 class WeiqUser(scrapy.Item):
