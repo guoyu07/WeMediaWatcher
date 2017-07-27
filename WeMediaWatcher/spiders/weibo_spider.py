@@ -2,7 +2,7 @@ from scrapy.spider import Spider
 from scrapy.selector import Selector
 from scrapy.http.request import Request
 from scrapy import log
-from WeMediaWatcher.items import MafengwoUserItem, MafengwoNoteItem
+from WeMediaWatcher.items import WeiboUser
 import time
 from scrapy.http import FormRequest
 import json
@@ -53,13 +53,48 @@ class WeiboUser_Spider(Spider):
                 script_content_html = eval(script_content_str).get("html")
                 if script_content_html is not None:
                     content_sel = Selector(text=script_content_html)
-                    # desc_list = content_sel.xpath("//li[contains(@class,'li_1')]")
-                    # if len(desc_list) > 0:
-                    #     for desc_item in desc_list:
-                    #         desc_item
                     cotent_l = content_sel.xpath("//li[contains(@class,'li_1')]//span//text()").extract()
                     content_sel.xpath("//li[contains(@class,'li_1')]//span//text()").extract()
                     desc_dict = {}
-                    for idx, c in cotent_l:
-                        if c.strip("") == "":
-                            print(c.strip())
+                    weibo_user_item = WeiboUser()
+                    card_list = content_sel.xpath("//div[contains(@class,'WB_cardwrap S_bg2')]")
+                    s = []
+                    for card in card_list:
+                        if len(card.xpath("div//div//h2//text()")) != 0:
+                            if card.xpath("div//div//h2//text()")[0].extract().strip() == "工作信息":
+                                for h in card.xpath("div//div//h2//text()"):
+                                    if h.extract().strip() != "" and h.extract().strip() != "工作信息":
+                                        if h.extract().strip() == "标签信息":
+                                            break
+                                        else:
+                                            s.append(
+                                                h.extract().strip().replace("\n", "").replace("\r", "").replace("\t",
+                                                                                                                ""))
+                    for idx, c in enumerate(cotent_l):
+                        if c.strip() == "昵称：":
+                            weibo_user_item["user_name"] = cotent_l[idx + 1].strip()
+                        if c.strip() == "真实姓名：":
+                            weibo_user_item["user_true_name"] = cotent_l[idx + 1].strip()
+                        if c.strip() == "所在地：":
+                            weibo_user_item["user_location"] = cotent_l[idx + 1].strip()
+                        if c.strip() == "性别：":
+                            weibo_user_item["gender"] = cotent_l[idx + 1].strip()
+                        if c.strip() == "生日：":
+                            weibo_user_item["birthday"] = cotent_l[idx + 1].strip()
+                        if c.strip() == "血型：":
+                            weibo_user_item["blood_type"] = cotent_l[idx + 1].strip()
+                        if c.strip() == "博客：":
+                            weibo_user_item["user_blog"] = cotent_l[idx + 1].strip()
+                        # if c.strip() == "个性域名：":
+                        #     weibo_user_item["custom_url_1"] = cotent_l[idx + 1].strip()
+                        if c.strip() == "简介：":
+                            weibo_user_item["user_desc"] = cotent_l[idx + 1].strip()
+                        if c.strip() == "注册时间：":
+                            weibo_user_item["enroll_time"] = cotent_l[idx + 1].strip()
+                        if c.strip() == "邮箱：":
+                            weibo_user_item["email"] = cotent_l[idx + 1].strip()
+                        if c.strip() == "QQ：":
+                            weibo_user_item["qq"] = cotent_l[idx + 1].strip()
+                        if c.strip() == "公司：":
+                            weibo_user_item["company"] = " ".join(s)
+        return weibo_user_item

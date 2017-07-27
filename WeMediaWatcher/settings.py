@@ -89,9 +89,9 @@ ROBOTSTXT_OBEY = False
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 FEED_EXPORT_ENCODING = 'utf-8'
-#
-ITEM_PIPELINES = {'WeMediaWatcher.pipelines.MongoDBPipeline': 300}
-MONGODB_SERVER = "182.254.244.138"
-MONGODB_PORT = 27017
-MONGODB_DB = "wemedia"
-MONGODB_COLLECTION = "WeiQ"
+# #
+# ITEM_PIPELINES = {'WeMediaWatcher.pipelines.MongoDBPipeline': 300}
+# MONGODB_SERVER = "182.254.244.138"
+# MONGODB_PORT = 27017
+# MONGODB_DB = "wemedia"
+# MONGODB_COLLECTION = "WeiQ"
