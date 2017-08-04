@@ -133,3 +133,22 @@ class WeiqUser(scrapy.Item):
     price_tweet = Field()
     price_retweet = Field()
     fans = Field()
+
+
+class LiveCptUser(scrapy.Item):
+    user_name = Field()
+    platform = Field()
+    gender = Field()
+    location = Field()
+    fans = Field()
+    avg_audience_num = Field()
+    max_audience_num = Field()
+    price_1 = Field()
+    price_2 = Field()
+    price_3 = Field()
+    price_4 = Field()
+    price_5 = Field()
+    price_6 = Field()
+    platform_url = Field()
+    detail_url = Field()
+    pass

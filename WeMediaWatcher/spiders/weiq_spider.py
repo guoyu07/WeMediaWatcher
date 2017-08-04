@@ -43,7 +43,7 @@ class WeiQUser_Spider(Spider):
 
     def start_requests(self):
         for i in range(1, 194):
-            url = "http://www.weiq.com/Owner/Newweibo/mediauser/class/11/p/{}.html".format(str(i))
+            url = "http://www.weiq.com/Livecpt/Invite/index/p/{}.html".format(str(i))
             sleeptime = random.randint(1, 5)
             time.sleep(sleeptime)
             print(url)
