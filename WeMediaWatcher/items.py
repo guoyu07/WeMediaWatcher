@@ -133,6 +133,7 @@ class WeiqUser(scrapy.Item):
     price_tweet = Field()
     price_retweet = Field()
     fans = Field()
+    weibo_id = Field()
 
 
 class LiveCptUser(scrapy.Item):

@@ -15,7 +15,7 @@ class WeiQUser_Spider(Spider):
     name = "weiq"
     allowed_domains = ["weiq.cn"]
     start_urls = [
-        "http://www.weiq.com/Owner/Newweibo/mediauser/class/11/p/%.html"
+        "http://www.weiq.com/Owner/Newweibo/mediauser/p/{}.html"
     ]
 
     headers = {
@@ -26,24 +26,24 @@ class WeiQUser_Spider(Spider):
         "Host": "www.weiq.com",
         "Upgrade-Insecure-Requests": 1,
         "Content-Type": " application/x-www-form-urlencoded; charset=UTF-8",
-        "Referer": "http://www.weiq.com/Owner/Newweibo/mediauser/class/11/p/5.html",
+        "Referer": "http://www.weiq.com/owner/newweibo/mediauser.html",
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36",
     }
 
     cookie = {
-        "PHPSESSID": "pihb874v8plodojjfc9g26bei0",
-        "UM_distinctid": "15d5ea9619f7b6-01a30db3e9f502-8383667-1fa400-15d5ea961a0aef",
-        "wadmincode": "pihb874v8plodojjfc9g26bei0",
-        "_getmc": "AAVeVwczUWZSbl0wVWtUaAo2AmwMOFNjV2I%3D",
-        "weiq_uuid": "05EADB7F-0BF3-4D6A-9D42-19A4142362BA",
-        "CNZZDATA1260733938": "261154917-1500529172-%7C1500529172",
-        "Hm_lvt_93deba7872e0b27eee3d1e5a437ceafe": "1500531745",
-        "Hm_lpvt_93deba7872e0b27eee3d1e5a437ceafe": "1500533043"
+        "UM_distinctid": "15d315a82d2741-0b16c507de293b-8383667-1fa400-15d315a82d3272",
+        "PHPSESSID": "vgk1t6knc9efqv9dodk9o9i3r1",
+        "wadmincode": "vgk1t6knc9efqv9dodk9o9i3r1",
+        "_getmc": "AGhePAc7UWVSYF1eVQxUYAo2Am0MMVNrV2lUYFI6DW1bMVA0",
+        "weiq_uuid": "E97DEDE6-C032-40BC-98C0-5E821D9CD738",
+        "CNZZDATA1260733938": "562659707-1499771446-http%253A%252F%252Fwww.baidu.com%252F%7C1501847347",
+        "Hm_lvt_93deba7872e0b27eee3d1e5a437ceafe": "1500636483,1501064137,1501147478,1501851226",
+        "Hm_lpvt_93deba7872e0b27eee3d1e5a437ceafe": "1501851493"
     }
 
     def start_requests(self):
-        for i in range(1, 194):
-            url = "http://www.weiq.com/Livecpt/Invite/index/p/{}.html".format(str(i))
+        for i in range(1, 1327):
+            url = "http://www.weiq.com/Owner/Newweibo/mediauser/p/{}.html".format(str(i))
             sleeptime = random.randint(1, 5)
             time.sleep(sleeptime)
             print(url)
@@ -61,12 +61,15 @@ class WeiQUser_Spider(Spider):
                 price_t = item.xpath("td")[4].xpath("p//span")[0].xpath("text()").extract()[0]
                 price_r = item.xpath("td")[4].xpath("p//span")[1].xpath("text()").extract()[0]
                 fans = item.xpath("td")[5].xpath("span/text()").extract()[0]
+                weibo_id = item.xpath("td")[1].xpath("p/a/@href").extract()[0].replace("/showdetailweibo/", "").replace(
+                    ".html", "")
                 weiq_item = WeiqUser()
                 weiq_item["user_name"] = name
                 weiq_item["account_type"] = type
                 weiq_item["impact_level"] = level
-                weiq_item["price_tweet"] = price_t
-                weiq_item["price_retweet"] = price_r
+                weiq_item["price_tweet"] = float(price_t.replace("￥", ""))
+                weiq_item["price_retweet"] = float(price_r.replace("￥", ""))
                 weiq_item["fans"] = fans
+                weiq_item["weibo_id"] = weibo_id
                 items.append(weiq_item)
         return items
