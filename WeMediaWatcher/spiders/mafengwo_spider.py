@@ -7,6 +7,7 @@ from scrapy.http import FormRequest
 import json
 import pymongo
 import time
+import random
 
 
 class Mafengwo_Spider(Spider):
@@ -41,8 +42,28 @@ class MafengwoNote_Spider(Spider):
 
     @staticmethod
     def load_user_list():
-        user_name_iuid = {"sicilia": "5249082"}
+        user_name_iuid = {'凯德印象': '773299', '张大枪': '9939790', '鱼鱼众生liluo': '5646072', '游向蓝天的鱼': '40894909',
+                          '小小莎老师': '80825723', '蘑菇张-NKU': '5094364', '北石同学': '19156318', '呆呆strajectory': '78139115',
+                          '方片7': '43132393', 'Thomas看看世界': '19382312', 'Abby45': '5017331', '林晶莹Lily': '50948302',
+                          '吴晖': '48561087', '王超irwin': '1179698', '杨舒涵-YOUNG': '5400739', '我就是吹风': '62297660',
+                          '团子E菲': '38551864', '湖北宋君': '77068946', '菜尾蝗-旅行摄影': '10519252', '志远天下行': '61009859',
+                          '爱幻想的sasa': '5217865', '摄影师one': '5029534', '沙漠玫瑰_': '17341906', 'White小晴': '10344859',
+                          'jennynui': '85324353', 'ayuyou': '5110334', '行者老湖': '326520', '青春河边巢': '40987395',
+                          '劭龙零度': '71028018', '哈先生Ha': '89888129', '一路Y-Y': '5225694', '草原900': '19130841',
+                          '幻想家japaul': '63760012', '游笑天': '668015'}
         return user_name_iuid
+
+    name_id_dict = {'凯德印象': '773299', '张大枪': '9939790', '鱼鱼众生liluo': '5646072', '游向蓝天的鱼': '40894909',
+                    '小小莎老师': '80825723', '蘑菇张-NKU': '5094364', '北石同学': '19156318', '呆呆strajectory': '78139115',
+                    '方片7': '43132393', 'Thomas看看世界': '19382312', 'Abby45': '5017331', '林晶莹Lily': '50948302',
+                    '吴晖': '48561087', '王超irwin': '1179698', '杨舒涵-YOUNG': '5400739', '我就是吹风': '62297660',
+                    '团子E菲': '38551864', '湖北宋君': '77068946', '菜尾蝗-旅行摄影': '10519252', '志远天下行': '61009859',
+                    '爱幻想的sasa': '5217865', '摄影师one': '5029534', '沙漠玫瑰_': '17341906', 'White小晴': '10344859',
+                    'jennynui': '85324353', 'ayuyou': '5110334', '行者老湖': '326520', '青春河边巢': '40987395',
+                    '劭龙零度': '71028018', '哈先生Ha': '89888129', '一路Y-Y': '5225694', '草原900': '19130841',
+                    '幻想家japaul': '63760012', '游笑天': '668015'}
+
+    id_name_dict = {v: k for k, v in name_id_dict.items()}
 
     @staticmethod
     def user_name_iuid(request_body):
@@ -81,7 +102,7 @@ class MafengwoNote_Spider(Spider):
             # 装配
             note_item["note_id"] = note_href.replace("http://www.mafengwo.cn", "").replace("/i/", "").replace(".html",
                                                                                                               "")
-            note_item["user_name"] = user_info["user_name"]
+            note_item["user_name"] = self.id_name_dict[user_info["iUid"]]  # user_info["user_name"]
             note_item["user_id"] = user_info["iUid"]
             note_item["note_title"] = note_title
             note_item["note_href"] = "http://www.mafengwo.cn/i/" + note_item["note_id"]
@@ -100,7 +121,7 @@ class MafengwoNote_Spider(Spider):
         requests = []
         user_name_iuid = self.load_user_list()
         for user_name, user_iuid in user_name_iuid.items():
-            for i in range(1, 4):
+            for i in range(1, 7):
                 form_data = {
                     "sAction": "getArticle",
                     "iPage": str(i),
