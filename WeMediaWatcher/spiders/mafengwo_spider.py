@@ -50,7 +50,7 @@ class MafengwoNote_Spider(Spider):
                           '爱幻想的sasa': '5217865', '摄影师one': '5029534', '沙漠玫瑰_': '17341906', 'White小晴': '10344859',
                           'jennynui': '85324353', 'ayuyou': '5110334', '行者老湖': '326520', '青春河边巢': '40987395',
                           '劭龙零度': '71028018', '哈先生Ha': '89888129', '一路Y-Y': '5225694', '草原900': '19130841',
-                          '幻想家japaul': '63760012', '游笑天': '668015'}
+                          '幻想家japaul': '63760012', '游笑天': '668015','榛美去': '814051'}
         return user_name_iuid
 
     name_id_dict = {'凯德印象': '773299', '张大枪': '9939790', '鱼鱼众生liluo': '5646072', '游向蓝天的鱼': '40894909',
@@ -61,7 +61,7 @@ class MafengwoNote_Spider(Spider):
                     '爱幻想的sasa': '5217865', '摄影师one': '5029534', '沙漠玫瑰_': '17341906', 'White小晴': '10344859',
                     'jennynui': '85324353', 'ayuyou': '5110334', '行者老湖': '326520', '青春河边巢': '40987395',
                     '劭龙零度': '71028018', '哈先生Ha': '89888129', '一路Y-Y': '5225694', '草原900': '19130841',
-                    '幻想家japaul': '63760012', '游笑天': '668015'}
+                    '幻想家japaul': '63760012', '游笑天': '668015','榛美去': '814051'}
 
     id_name_dict = {v: k for k, v in name_id_dict.items()}
 
@@ -93,7 +93,10 @@ class MafengwoNote_Spider(Spider):
                 note_title = title_info.xpath("@title").extract()[1]
             else:
                 note_title = title_info.xpath("@title").extract()[0]
-            note_href = title_info.xpath("@href").extract()[0]
+            if note_type == "蜂首游记":
+                note_href = title_info.xpath("@href").extract()[1]
+            else:
+                note_href = title_info.xpath("@href").extract()[0]
             note_more = note_info.xpath("div//em//text()").extract()
             pv = note_more[0].split("/")[0]
             comment = note_more[0].split("/")[1]
@@ -105,7 +108,7 @@ class MafengwoNote_Spider(Spider):
             note_item["user_name"] = self.id_name_dict[user_info["iUid"]]  # user_info["user_name"]
             note_item["user_id"] = user_info["iUid"]
             note_item["note_title"] = note_title
-            note_item["note_href"] = "http://www.mafengwo.cn/i/" + note_item["note_id"]
+            note_item["note_href"] = "http://www.mafengwo.cn/i/" + note_item["note_id"] + ".html"
             note_item["pv"] = pv
             note_item["comment"] = comment
             note_item["collect"] = collect
