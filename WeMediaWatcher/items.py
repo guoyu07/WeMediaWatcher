@@ -152,4 +152,20 @@ class LiveCptUser(scrapy.Item):
     price_6 = Field()
     platform_url = Field()
     detail_url = Field()
+
+class CtripUser(scrapy.Item):
+    user_name = Field()
+    user_raw_name = Field()
+    user_homepage = Field()
+    user_id = Field()
+    user_code = Field()
+    location = Field()
+    gender = Field()
+    user_desc = Field()
+    fans = Field()
+    follow = Field()
+
+
+class CtripNoteItem(scrapy.Item):
+    user_name = Field()
     pass
