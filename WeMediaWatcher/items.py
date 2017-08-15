@@ -168,4 +168,10 @@ class CtripUser(scrapy.Item):
 
 class CtripNoteItem(scrapy.Item):
     user_name = Field()
-    pass
+    user_raw_name = Field()
+    user_id = Field()
+    title = Field()
+    note_location = Field()
+    pv = Field()
+    comment = Field()
+    create_time = Field()
